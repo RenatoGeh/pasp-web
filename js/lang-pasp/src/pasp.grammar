@@ -1,0 +1,52 @@
+@top plp { (Fact | Rule | Pfact | Prule | Cfact | Query)+ }
+
+@tokens {
+  space { @whitespace+ }
+  Comment { "%" ![\n]* }
+  Const { @asciiLowercase @asciiLetter* }
+  Var { @asciiUppercase @asciiLetter* }
+  Id { @digit+ }
+  Prob { @digit+ | (@digit* ("." @digit+)) }
+  Final { "." }
+
+  Neg { "not" }
+  add { "+" }
+  sub { "-" }
+  div { "/" }
+  mod { "\\" }
+  mul { "*" }
+  eqq { "=" }
+
+  @precedence { Neg, Const, Prob, Final }
+}
+
+@detectDelim
+
+@precedence { neg @left, bop @left }
+
+@skip { space | Comment }
+
+Op { add | sub | div | mod | mul | eqq }
+
+Gratom { Neg* (Const | Grpred) }
+Grpred { (!neg Neg)* Const "(" (Gratom | Id) ("," (Gratom | Id | Interval))* ")" }
+
+Atom { Neg* (Const | Var | Pred) }
+Interval { Id ".." Id }
+Pred { (!neg Neg)* Const "(" (Atom | Id | Interval) ("," (Atom | Id | Interval))* ")" }
+
+fact { Atom "." }
+Fact { fact }
+Pfact { Prob "::" fact }
+Cfact { "[" Prob "," Prob "]" "::" fact }
+
+Head { Atom ("," Atom)* }
+Body { (Atom | Bop) ("," (Atom | Bop))* }
+rule { Head ":-" Body "." }
+Rule { rule }
+Prule { Prob "::" rule }
+
+Bop { (!bop (Id | Var | Bop)) Op (Id | Var | Bop) }
+
+Interp { Gratom ("," Gratom)* }
+Query { "#query(" Interp ("|" Interp)? ")" Final? }
