@@ -9,7 +9,7 @@ const editorConfig = EditorView.theme({
 
 let editor = new EditorView({
   extensions: [editorConfig, basicSetup, pasp()],
-  doc: "0.5::a.",
+  doc: "% Write your model here or try one of the examples.",
   parent: document.getElementById("editor"),
 })
 

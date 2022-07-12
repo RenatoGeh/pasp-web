@@ -8,7 +8,8 @@
 calls(X) :- alarm, neighbor(X).
 neighbor(a). neighbor(b).
 
-#query(alarm | burglary; earthquake)
-#query(alarm | not burglary; earthquake)
-#query(alarm | burglary; not earthquake)
-#query(alarm | not burglary; not earthquake)
+% Probabilities are sharp, as the PLP is acyclic.
+#query(alarm | burglary, earthquake).
+#query(alarm | not burglary, earthquake).
+#query(alarm | burglary, not earthquake).
+#query(alarm | not burglary, not earthquake).

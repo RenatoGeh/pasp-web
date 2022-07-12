@@ -5,5 +5,6 @@ smokes(X) :- stress(X).
 smokes(X) :- influences(Y, X), smokes(Y).
 0.3::influences(a, b). 0.3::influences(b, a). 0.2::stress(b).
 
+% Probabilities are sharp, as the ground program is acyclic.
 #query(smokes(a))
 #query(smokes(b))

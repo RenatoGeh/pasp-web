@@ -4,6 +4,7 @@
 sleep :- not work, not insomnia. work :- not sleep.
 0.3::insomnia.
 
+% A contradiction (cycle) appears when insomnia is not true, in which case we turn to credal sets.
 #query(insomnia)
 #query(work)
 #query(sleep)
