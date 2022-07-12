@@ -12,6 +12,15 @@ div.main {
 
 code {
   font-family: "Roboto Mono";
+  background-color: transparent;
+}
+
+p code {
+  background-color: hsl(210,8%,90%);
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-bottom: 2px;
+  border-radius: 4px;
 }
 
 /* NavBar */
@@ -23,6 +32,7 @@ div.navbar {
   top: 0;
   left: 0;
   width: 100%;
+  z-index: 1;
 }
 
 div.navbar a {
@@ -44,6 +54,7 @@ div.navbar code {
   text-decoration: none;
   font-size: 16px;
   font-weight: bold;
+  background-color: transparent;
 }
 
 div.navbar a:hover {

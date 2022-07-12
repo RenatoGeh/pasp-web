@@ -11,6 +11,10 @@
   <!-- MathJax -->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <!-- highlight.js -->
+  <link rel="stylesheet" href="./highlight/styles/idea.min.css">
+  <script src="./highlight/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
 
   <title>pasp | Probabilistic Answer Set Programming</title>
 </head>
@@ -55,7 +59,7 @@
       <a href="https://potassco.org/clingo/">clingo</a>. Additionally, we further equip the
       language with <i>credal facts</i> besides probabilistic ones. We adopt a hybrid
       <a href="https://dtai.cs.kuleuven.be/problog/">ProbLog</a>-<a
-      href="https://potassco.org/clingo/">clingo</a> that makes modeling problems easy and
+      href="https://potassco.org/clingo/">clingo</a> syntax that makes modeling problems easy and
       intuitive. <a href="#try"><b>Try it yourself!</b></a>
     </p>
 
@@ -78,6 +82,40 @@
     <script src="./js/editor.bundle.js"></script>
 
     <h3 id="download">Download</h3>
+
+    <p>
+      The code as a Python package is hosted in <a href="https://github.com/RenatoGeh/pasp">GitHub
+      </a>. For now, <code>pasp</code> is only to be run locally. Clone the <code>git</code>
+      repository to a directory of your choice, and within that directory simply run
+    </p>
+
+    <pre><code class="language-pycon">
+>>> import pasp
+    </code></pre>
+
+    to import the <code>pasp</code> module. With the module loaded, you may then parse a PLP and
+    produce queries.
+
+    <pre><code class="language-pycon">
+>>> P = pasp.parse("examples/insomnia.lp")
+>>> print(P)
+&lt;Logic Program:
+sleep :- not work, not insomnia.
+work :- not sleep.,
+Probabilistic Facts:
+[0.3::insomnia],
+Credal Facts:
+[]
+Queries
+[ℙ(insomnia), ℙ(work), ℙ(sleep), ℙ(not sleep), ℙ(not work)]&gt;
+>>> pasp.exact(P)
+ℙ(insomnia) = [0.3, 0.3]
+ℙ(work) = [0.3, 1.0]
+ℙ(sleep) = [0.0, 0.7]
+ℙ(not sleep) = [0.3, 1.0]
+ℙ(not work) = [0.0, 0.7]
+[[0.3, 0.3], [0.3, 1.0], [0.0, 0.7], [0.3, 1.0], [0.0, 0.7]]
+    </code></pre>
 
     <h3>References</h3>
 
