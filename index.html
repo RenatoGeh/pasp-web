@@ -7,7 +7,7 @@
   <!-- CSS -->
   <link rel="stylesheet" href="./css/main.css">
   <!-- Roboto Font -->
-  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
   <!-- MathJax -->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -16,7 +16,80 @@
 </head>
 
 <body>
-<h1><code>pasp</code></h1><h2 class="subtitle">Probabilistic Answer Set Programming</h2>
-<script src="./js/editor.bundle.js"></script>
+  <div class="navbar">
+    <code>pasp</code>
+    <a href="index.html">Home</a>
+    <a href="#try">Online</a>
+    <a href="#download">Download</a>
+    <a href="#docs">Documentation</a>
+  </div>
+
+  <div class="main">
+    <h1><code>pasp</code></h1><h2 class="subtitle">Probabilistic Answer Set Programming</h2>
+
+    <p>
+      <code>pasp</code> is a probabilistic-logic programming language based around
+      <a href="https://en.wikipedia.org/wiki/Answer_set_programming">Answer Set Programming</a>
+      (ASP). Probabilistic-Logic Programs (PLPs) are logic programs in which some facts may come
+      annotated with probabilities. Equipping logic programs with probabilities as a measure of
+      uncertainty allows PLPs to easily and intuitively model complex real-life scenarios. A
+      successful example of a PLP is <a href="https://dtai.cs.kuleuven.be/problog/">ProbLog</a>,
+      which exploits the expressivity of a Prolog-like language together with efficient algorithms
+      for many probabilistic inference tasks.
+    </p>
+
+    <p>
+      Unfortunately, because ProbLog only accepts stratified programs, its semantics are
+      ill-defined when dealing with contradictions, i.e. when more than one answer is acceptable
+      under the constraints of the knowledge base. This is where ASP comes in: by leveraging the
+      power of <a href="https://potassco.org/">Potassco</a>'s
+      <a href="https://potassco.org/clingo/">clingo</a>, one is able to efficiently enumerate all
+      stable models of a (possibly cyclic) program and properly define a semantics over stable
+      models. To introduce probabilities into the mix, we adopt the <i>credal semantics</i>
+      <a href="#refs-1">[1]</a><a href="#refs-2">[2]</a>, specifying interval of probabilities
+      (i.e., credal sets) when more than one model occurs in a program.
+    </p>
+
+    <p>
+      <code>pasp</code> works by implementing the credal semantics as a layer on top of
+      <a href="https://potassco.org/clingo/">clingo</a>. Additionally, we further equip the
+      language with <i>credal facts</i> besides probabilistic ones. We adopt a hybrid
+      <a href="https://dtai.cs.kuleuven.be/problog/">ProbLog</a>-<a
+      href="https://potassco.org/clingo/">clingo</a> that makes modeling problems easy and
+      intuitive. <a href="#try"><b>Try it yourself!</b></a>
+    </p>
+
+    <h3 id="try">Try <code>pasp</code>!</h3>
+    <div class="editor">
+      <div class="controls">
+        <button id="run" title="Run code">Run</button>
+        <select id="examples">
+          <option>Select example...</option>
+          <option>Asia</option>
+          <option>Earthquake</option>
+          <option>Insomnia</option>
+          <option>Prisoners</option>
+          <option>Smokers</option>
+        </select>
+      </div>
+      <div id="editor"></div>
+      <textarea class="output" readonly></textarea>
+    </div>
+    <script src="./js/editor.bundle.js"></script>
+
+    <h3 id="download">Download</h3>
+
+    <h3>References</h3>
+
+    <ol class="bib">
+      <li id="refs-1"><i>On the Semantics and Complexity of Probabilistic Logic Programs</i>. Fabio
+        Gagliardi Cozman and Denis Deratani Mauá. Journal of Artificial Intelligence Research, Vol.
+        60 (2017). <a href="https://jair.org/index.php/jair/article/view/11085/26272">[pdf]</a></li>
+      <li id="refs-2"><i>The Joy of Probabilistic Answer Set programming: Semantics, complexity,
+        expressivity and inference</i>. Fabio Gagliardi Cozman and Denis Deratani Mauá.
+        International Journal of Approximate Reasoning, Vol. 125 (2020).
+        <a href="https://www.ime.usp.br/~ddm/publication/cozman-2020-ijar/cozman-2020-ijar.pdf">[pdf]</a></li>
+    </ol>
+  </div>
 </body>
 
