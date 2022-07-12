@@ -32,35 +32,24 @@
     <h1><code>pasp</code></h1><h2 class="subtitle">Probabilistic Answer Set Programming</h2>
 
     <p>
-      <code>pasp</code> is a probabilistic-logic programming language based around
-      <a href="https://en.wikipedia.org/wiki/Answer_set_programming">Answer Set Programming</a>
-      (ASP). Probabilistic-Logic Programs (PLPs) are logic programs in which some facts may come
-      annotated with probabilities. Equipping logic programs with probabilities as a measure of
-      uncertainty allows PLPs to easily and intuitively model complex real-life scenarios. A
-      successful example of a PLP is <a href="https://dtai.cs.kuleuven.be/problog/">ProbLog</a>,
-      which exploits the expressivity of a Prolog-like language together with efficient algorithms
-      for many probabilistic inference tasks.
+      <code>pasp</code> is a probabilistic logic programming framework that extends Answer Set
+      Programming with (interval-valued) probabilities. As such, <code>pasp</code> allows the
+      specification and querying of (sets of) distributions over combinatorial objects, which are
+      formulated as the answer sets of underlying logic programs. The use of interval-valued
+      probabilities allows one to better capture imprecision and indeterminacy in uncertainty
+      elicitation, as well as to represent decision-making tasks such as expected utility
+      maximization. The semantics of <code>pasp</code> programs used here is defined in
+      <a href="#refs-1">[1]</a>, <a href="#refs-2">[2]</a> and <a href="#refs-3">[3]</a>.
+      <code>pasp</code> uses the powerful ASP solver
+      <a href="https://potassco.org/clingo/">clingo</a> to obtain answer sets for induced answer
+      set programs.
     </p>
 
     <p>
-      Unfortunately, because ProbLog only accepts stratified programs, its semantics are
-      ill-defined when dealing with contradictions, i.e. when more than one answer is acceptable
-      under the constraints of the knowledge base. This is where ASP comes in: by leveraging the
-      power of <a href="https://potassco.org/">Potassco</a>'s
-      <a href="https://potassco.org/clingo/">clingo</a>, one is able to efficiently enumerate all
-      stable models of a (possibly cyclic) program and properly define a semantics over stable
-      models. To introduce probabilities into the mix, we adopt the <i>credal semantics</i>
-      <a href="#refs-1">[1]</a><a href="#refs-2">[2]</a>, specifying interval of probabilities
-      (i.e., credal sets) when more than one model occurs in a program.
-    </p>
-
-    <p>
-      <code>pasp</code> works by implementing the credal semantics as a layer on top of
-      <a href="https://potassco.org/clingo/">clingo</a>. Additionally, we further equip the
-      language with <i>credal facts</i> besides probabilistic ones. We adopt a hybrid
-      <a href="https://dtai.cs.kuleuven.be/problog/">ProbLog</a>-<a
-      href="https://potassco.org/clingo/">clingo</a> syntax that makes modeling problems easy and
-      intuitive. <a href="#try"><b>Try it yourself!</b></a>
+      This website provides a web-interface for easy access of the PASP reasoning engine, using a
+      <a href="https://potassco.org/">Potassco</a>-like declarative language. The engine is granted
+      limited computational resources, and will not work on larger models. Use the drop-down box
+      below to inspect examples of the language’s syntax and modeling capabilities.
     </p>
 
     <h3 id="try">Try <code>pasp</code>!</h3>
@@ -84,9 +73,18 @@
     <h3 id="download">Download</h3>
 
     <p>
-      The code as a Python package is hosted in <a href="https://github.com/RenatoGeh/pasp">GitHub
+      The code as a Python package is hosted on <a href="https://github.com/RenatoGeh/pasp">GitHub
       </a>. For now, <code>pasp</code> is only to be run locally. Clone the <code>git</code>
-      repository to a directory of your choice, and within that directory simply run
+      repository to a directory of your choice, say <code>pasp/</code>, install dependencies by
+      running <code>requirements.txt</code> through <code>pip</code>
+    </p>
+
+    <pre><code class="language-bash">
+  $ pip install -r requirements.txt
+    </code></pre>
+
+    <p>
+      and within the <code>pasp/</code> directory simply run
     </p>
 
     <pre><code class="language-pycon">
@@ -127,6 +125,11 @@ Queries
         expressivity and inference</i>. Fabio Gagliardi Cozman and Denis Deratani Mauá.
         International Journal of Approximate Reasoning, Vol. 125 (2020).
         <a href="https://www.ime.usp.br/~ddm/publication/cozman-2020-ijar/cozman-2020-ijar.pdf">[pdf]</a></li>
+      <li id="refs-3"><i>Modeling Markov Decision Processes with Imprecise Probabilities Using
+        Probabilistic Logic Programming</i>. Thiago P. Bueno, Denis D. Mauá, Leliane N. de
+        Barros and Fabio G. Cozman. Proceedings of the 10th International Symposium on Imprecise
+        Probabilities: Theories and Applications, PMLR Vol. 62 (2017).
+        <a href="https://proceedings.mlr.press/v62/bueno17a/bueno17a.pdf">[pdf]</a></li>
     </ol>
   </div>
 </body>
